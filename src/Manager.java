@@ -15,7 +15,11 @@ public class Manager {
 
     public String generateCode() {
         email_count++;
-        return Integer.toString(email_count, 36).substring(0, 6);
+        String code = Integer.toString(email_count, 36);
+        while (code.length() < 6) {
+            code = "0" + code;
+        }
+        return code;
     }
 
     public Email sendEmail(String sender, List<String> recipients, String subject, String body) {
