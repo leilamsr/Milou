@@ -36,9 +36,9 @@ public class Main {
 
                         System.out.println("\nUnread Emails:");
                         System.out.println("3 unread emails:");
-                        System.out.println("+ mamad@milou.com - Our new meeting (1bc170)");
-                        System.out.println("+ raees@milou.com - Book suggestions (fnjd1o)");
-                        System.out.println("+ nika@milou.com - New feature (12dsb1)");
+                        System.out.println("+ Faegheh@milou.com - Our new meeting (1bc170)");
+                        System.out.println("+ Nastaran@milou.com - Book suggestions (fnjd1o)");
+                        System.out.println("+ Narges@milou.com - New feature (12dsb1)");
 
                         loggedIn = true;
                         System.out.println("Select your desired number.");
