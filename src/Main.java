@@ -7,24 +7,116 @@ public class Main {
     private static Manager manager = new Manager();
 
     public static void main(String[] args) {
-        System.out.println("Welcome!\nSelect your desired number.");
-        printCommands();
 
-        while (true) {
-            System.out.println("Desired number: ");
-            String number = scn.nextLine();
+        ArrayList<User> users = new ArrayList<>();
 
-            switch (number) {
-                case "1":sendEmail(); break;
-                case "2":viewEmail(); break;
-                case "3":replyEmail(); break;
-                case "4":forwardEmail(); break;
-                case "5":
-                    System.out.println("Goodbye!");return;
-                default:
-                    System.out.println("You have entered the wrong number!Please try again.");
-                    printCommands();
+        users.add(new User("Leila", "Leila.m@milou.com", "password123"));
+
+        System.out.println("Welcome to Milou Email Service!");
+
+        while(true) {
+            System.out.print("[L]ogin, [S]ign up: ");
+            String choice = scn.nextLine().trim().toLowerCase();
+
+            if (choice.equals("l")) {
+                System.out.print("Email: ");
+                String email = scn.nextLine().trim().toLowerCase();
+                if (!email.contains("@")) {
+                    email = email + "@milou.com";
+                }
+
+                System.out.print("Password: ");
+                String password = scn.nextLine().trim();
+
+                boolean loggedIn = false;
+                for (User user : users) {
+                    if (user.email.equalsIgnoreCase(email) && user.password.equals(password)) {
+                        currentUserName = user.email;
+                        System.out.printf("\nWelcome back, %s!\n", user.name);
+
+                        System.out.println("\nUnread Emails:");
+                        System.out.println("3 unread emails:");
+                        System.out.println("+ mamad@milou.com - Our new meeting (1bc170)");
+                        System.out.println("+ raees@milou.com - Book suggestions (fnjd1o)");
+                        System.out.println("+ nika@milou.com - New feature (12dsb1)");
+
+                        loggedIn = true;
+                        System.out.println("Select your desired number.");
+                        printCommands();
+
+                        while (true) {
+                            System.out.println("Desired number: ");
+                            String number = scn.nextLine();
+
+                            switch (number) {
+                                case "1":sendEmail(); break;
+                                case "2":viewEmail(); break;
+                                case "3":replyEmail(); break;
+                                case "4":forwardEmail(); break;
+                                case "5":
+                                    System.out.println("Goodbye!");return;
+                                default:
+                                    System.out.println("You have entered the wrong number!Please try again.");
+                                    printCommands();
+                            }
+                        }
+                    }
+                }
+
+                if (!loggedIn) {
+                    System.out.println("Invalid email or password!");
+                }
+
+            } else if (choice.equals("s")) {
+                System.out.print("Name: ");
+                String name = scn.nextLine().trim();
+
+                System.out.print("Email: ");
+                String email = scn.nextLine().trim();
+                if (!email.contains("@")) {
+                    email = email + "@milou.com";
+                }
+
+                boolean emailExists = false;
+                for (User user : users) {
+                    if (user.email.equals(email)) {
+                        emailExists = true;
+                        break;
+                    }
+                }
+
+                if (emailExists) {
+                    System.out.println("This email is already registered!");
+                    continue;
+                }
+
+                System.out.print("Password: ");
+                String password = scn.nextLine().trim();
+
+                if (password.length() < 8) {
+                    System.out.println("Password must be at least 8 characters!");
+                    continue;
+                }
+
+                users.add(new User(name, email, password));
+                System.out.println("\nYour new account is created.");
+                System.out.println("Go ahead and login!");
+
+            } else {
+                System.out.println("Please enter 'L' for Login or 'S' for Sign up.");
             }
+        }
+    }
+
+    static class User {
+        String name;
+        String email;
+        String password;
+
+        public User(String name, String email, String password) {
+            this.name = name;
+            this.email = email;
+            this.password = password;
         }
     }
 
